@@ -49,9 +49,9 @@ router.post("/login", async (req, res) => {
   if (!validPass) return res.status(400).send("Invalid password!");
 
   res.send("Logged in Successfully!");
-  User.find()
-    .then((users) => res.json(users))
-    .catch((err) => res.status(400).json("Error: " + err));
+//   User.find()
+//     .then((users) => res.json(users))
+//     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;
