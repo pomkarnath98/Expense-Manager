@@ -14,8 +14,12 @@ mongoose.connect(
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    useCreateIndex: true
   },
-  () => {
+  (err) => {
+    if(err){
+      console.log(err)
+    }
     console.log("The database is connected");
   }
 );
