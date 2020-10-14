@@ -82,18 +82,98 @@ const Trans = async (req, res) => {
 const fiveTrans = async (req, res) => {
   const { user_id } = req.params;
 
-  Transaction.find({user_id}).sort({'timestamp': -1}).limit(5)
+  Transaction.find({ user_id })
+    .sort({ timestamp: -1 })
+    .limit(5)
     .then((trans) => res.json(trans))
     .catch((err) => res.status(400).json("Error: " + err));
-}
+};
 
 const getTrans = async (req, res) => {
   const { user_id } = req.params;
+  const page = Number(req.query.page) || 1;
+  const type = req.query.type || "all";
+  const limit = 2;
 
-  Transaction.find({user_id})
-    .then((trans) => res.json(trans))
+  let transactions;
+  if (type == "credit") {
+    await Transaction.find({ user_id, type: "Credit" })
+      .sort({ timestamp: -1 })
+      .then((trans) => (transactions = trans))
+      .catch((err) => res.status(400).json("Error: " + err));
+
+    const results = {};
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    if (endIndex < transactions.length) {
+      results.next = {
+        page: page + 1,
+      };
+    }
+
+    if (startIndex > 0) {
+      results.prev = {
+        page: page - 1,
+      };
+    }
+
+    results.current = transactions.slice(startIndex, endIndex);
+    return res.json(results);
+  }
+
+  if (type == "debit") {
+    await Transaction.find({ user_id, type: "Debit" })
+      .sort({ timestamp: -1 })
+      .then((trans) => (transactions = trans))
+      .catch((err) => res.status(400).json("Error: " + err));
+
+    const results = {};
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    if (endIndex < transactions.length) {
+      results.next = {
+        page: page + 1,
+      };
+    }
+
+    if (startIndex > 0) {
+      results.prev = {
+        page: page - 1,
+      };
+    }
+
+    results.current = transactions.slice(startIndex, endIndex);
+    return res.json(results);
+  }
+
+  await Transaction.find({ user_id })
+    .sort({ timestamp: -1 })
+    .then((trans) => (transactions = trans))
     .catch((err) => res.status(400).json("Error: " + err));
 
+  const results = {};
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  if (endIndex < transactions.length) {
+    results.next = {
+      page: page + 1,
+    };
+  }
+
+  if (startIndex > 0) {
+    results.prev = {
+      page: page - 1,
+    };
+  }
+
+  results.current = transactions.slice(startIndex, endIndex);
+  res.json(results);
 };
 
 module.exports = { Register, Login, Trans, fiveTrans, getTrans };
