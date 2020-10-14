@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const moment = require("moment");
 
 const Schema = mongoose.Schema;
 
@@ -18,7 +17,9 @@ const transactionSchema = new Schema({
   },
   date: {
     type: String,
-    default: moment().format("MMMM Do YYYY, h:mm:ss a"),
+  },
+  timestamp: {
+    type: Number,
   },
 });
 

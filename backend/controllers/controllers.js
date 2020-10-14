@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const moment = require("moment");
 const {
   registerValidation,
   loginValidation,
@@ -68,6 +69,8 @@ const Trans = async (req, res) => {
       title: req.body.title,
       type: req.body.type,
       amount: req.body.amount,
+      date: moment().format("MMMM Do YYYY, h:mm:ss a"),
+      timestamp: moment().unix(),
     });
     const response = await user.save();
     res.send(response);
@@ -75,6 +78,14 @@ const Trans = async (req, res) => {
     res.status(400).send(err);
   }
 };
+
+const fiveTrans = async (req, res) => {
+  const { user_id } = req.params;
+
+  Transaction.find({user_id}).sort({'timestamp': -1}).limit(5)
+    .then((trans) => res.json(trans))
+    .catch((err) => res.status(400).json("Error: " + err));
+}
 
 const getTrans = async (req, res) => {
   const { user_id } = req.params;
@@ -85,4 +96,4 @@ const getTrans = async (req, res) => {
 
 };
 
-module.exports = { Register, Login, Trans, getTrans };
+module.exports = { Register, Login, Trans, fiveTrans, getTrans };
