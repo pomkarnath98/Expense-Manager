@@ -6,7 +6,6 @@ const { registerValidation, loginValidation } = require("../validation");
 const User = require("../models/User");
 
 router.post("/register", async (req, res) => {
-    
   const { error } = registerValidation(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
@@ -17,11 +16,8 @@ router.post("/register", async (req, res) => {
     return res.status(400).send("Email already exists in the database");
   }
 
-  const hashedPassword = await bcrypt.hash(
-    req.body.password,
-    10
-  );
-  console.log(1)
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  console.log(1);
   try {
     const user = new User({
       name: req.body.name,
@@ -50,9 +46,9 @@ router.post("/login", async (req, res) => {
   if (!validPass) return res.status(400).send("Invalid password!");
 
   res.send("Logged in Successfully!");
-//   User.find()
-//     .then((users) => res.json(users))
-//     .catch((err) => res.status(400).json("Error: " + err));
+  //   User.find()
+  //     .then((users) => res.json(users))
+  //     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;
