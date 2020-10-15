@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Login from "./Components/Login"
 import { Route } from "react-router-dom"
@@ -12,7 +11,8 @@ function App() {
     <div className="App">
       
       <Route path="/" exact component = {Login}/>
-      <Route path="/signup" component = {Register}/>
+      <Route path="/signup" render = {(props)=> <Register {...props}/>}/>
+     
     </div>
   );
 }

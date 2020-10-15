@@ -2,12 +2,12 @@ import React, {useState} from 'react'
 import NavBar from "./NavBar"
 import style from "./nav.module.css"
 import { useDispatch, useSelector } from "react-redux"
-import { alerttype, fetchDetails, fetchregisterDetails } from "../Redux/action"
+import { fetchregisterDetails } from "../Redux/action"
 
-function Register() {
+function Register(props) {
     const [data,setData] = useState({name:"",email:"",password:""})
      const dispatch = useDispatch()
-     const selector = useSelector(state => state.data)
+     const {errMsg,reg} = useSelector(store=>store)
 
     const handleChange = (e)=>{
         setData({
@@ -16,57 +16,65 @@ function Register() {
     }
     const handleSubmit = (e)=>{
         e.preventDefault()
-        console.log(data)
-        dispatch(fetchDetails())
         dispatch(fetchregisterDetails(data))
+
     }
-    console.log(data.name,data.email,data.password)
+    const regSuccess = ()=>{
+        props.history.push("/")
+    }
+
+
     return (
         <div  className={style.background}>
+            { reg && regSuccess()}
             <NavBar/>
             <div className="container text-center" style={{width:"34%",marginLeft:"60.7%"}}>
             <form  style={{backgroundColor:"white",padding:"0 10% 10% 10%",borderRadius:"1%"}}>
                 <br/>
-                <div class="form-group">
-                  
+                <div className="form-group">
+                {errMsg && errMsg}
                   <input 
                   type="text"
                   style={{backgroundColor:"#fffcc8",border:"none"}} 
-                  class="form-control shadow-sm" 
+                  className="form-control shadow-sm" 
                   aria-describedby="Name" 
                   placeholder="Name"
                   name="name"
                   value={data.name}
-                  onChange={handleChange}/>
+                  onChange={handleChange}
+                  required
+                  />
                   
                     
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   
                   <input type="email" 
                   style={{backgroundColor:"#fffcc8",border:"none"}} 
-                  class="form-control shadow-sm"  
+                  className="form-control shadow-sm"  
                   aria-describedby="emailHelp" 
                   placeholder="Email"
                   name="email"
                   value={data.email}
-                  onChange={handleChange}/>
+                  onChange={handleChange}
+                  required/>
                     
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     
                     <input type="password"
                     style={{backgroundColor:"#fffcc8",border:"none"}}
-                    class="form-control shadow-sm" 
+                    className="form-control shadow-sm" 
                     placeholder="Password"
                     name="password"
                     value={data.password}
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    required/>
                     
                 </div>
                 <button 
                 type="submit" 
-                class="btn btn-primary bg-success"
+                className="btn btn-primary bg-success"
                 onClick={handleSubmit}>Create An Account</button>
             </form>
             </div>

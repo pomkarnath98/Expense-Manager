@@ -16,12 +16,12 @@ function Login() {
                 <br/>
                 <div class="form-group">
                   
-                  <input type="email" style={{backgroundColor:"#fffcc8",border:"none"}} class="form-control shadow-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email"/>
+                  <input type="email" style={{backgroundColor:"#fffcc8",border:"none"}} class="form-control shadow-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required />
                     
                 </div>
                 <div class="form-group">
                     
-                    <input type="password" style={{backgroundColor:"#fffcc8",border:"none"}} class="form-control shadow-sm" id="exampleInputPassword1" placeholder="Password"/>
+                    <input type="password" style={{backgroundColor:"#fffcc8",border:"none"}} class="form-control shadow-sm" id="exampleInputPassword1" placeholder="Password" required />
                     
                 </div>
                 <button type="submit" class="btn btn-primary bg-success">Submit</button>
