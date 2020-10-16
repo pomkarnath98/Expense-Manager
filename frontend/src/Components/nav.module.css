@@ -1,0 +1,24 @@
+* {
+  background-color: "red";
+}
+.navHeader {
+  font-weight: bolder;
+  font-family: sans-serif;
+  color: #6c757d;
+  margin-left: 62%;
+}
+
+.navText a {
+  background-color: "white";
+  font-weight: "bold";
+  font-family: "sans-serif";
+}
+
+body {
+  z-index: 1;
+  background-image: url("https://cdn.dribbble.com/users/1293874/screenshots/13552537/media/8f646a065654cb2d789701762bdd778a.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 60% 100%;
+  background-color: #fafcfd;
+}
