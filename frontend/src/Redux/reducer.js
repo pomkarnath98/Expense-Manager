@@ -12,7 +12,7 @@ const initState = {
   errMsg: "",
   reg: false,
   isLogin: false,
-  user: "5f81fbac719d6f3b1ce706ab",
+  user: "",
 };
 
 export default (state = initState, action) => {

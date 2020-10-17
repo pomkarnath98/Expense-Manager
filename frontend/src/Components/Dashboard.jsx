@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import style from "./nav.module.css";
 
 export const Dashboard = ()=> {
@@ -40,7 +41,7 @@ export const Dashboard = ()=> {
                     </div>
                 </div>
                 <div className="container">
-                <div className="text-center"><button className="rounded bg-white text-success">ALL Transactions</button></div>
+                <div className="text-center"><Link to='/ledger'><button className="rounded bg-white text-success">ALL Transactions</button></Link></div>
                     <div className="row text-center">
                        
                         <div>

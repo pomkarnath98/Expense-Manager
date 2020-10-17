@@ -12,7 +12,7 @@ function App() {
       <Route path="/" exact render={(props) => <Login {...props} />} />
       <Route path="/signup" render={(props) => <Register {...props} />} />
       <Route path="/dashboard" render={(props) => <Dashboard />} />
-      {/* <Ledger /> */}
+      <Route path="/ledger" render={(props) => <Ledger />} />
     </div>
   );
 }

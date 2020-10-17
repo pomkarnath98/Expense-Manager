@@ -29,7 +29,7 @@ const Ledger = () => {
 
   return (
     <div id="ledger">
-        <h2>All Transactions</h2>
+        <h2 className='my-2 text-muted'>All Transactions</h2>
       <table>
         <thead>
           <tr>
