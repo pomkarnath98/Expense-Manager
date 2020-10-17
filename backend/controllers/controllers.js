@@ -79,6 +79,30 @@ const Trans = async (req, res) => {
   }
 };
 
+const summary = async (req, res) => {
+  const { user_id } = req.params;
+
+  try {
+    const totalIncome = (
+      await Transaction.find({ user_id, type: "Credit" })
+    ).reduce((a, b) => a + b.amount, 0);
+
+    const totalExpense = (
+      await Transaction.find({ user_id, type: "Debit"})
+    ).reduce((a, b) => a + b.amount, 0);
+
+    const balance = totalIncome - totalExpense;
+
+    res.json({
+      totalIncome,
+      totalExpense,
+      balance,
+    });
+  } catch (err) {
+    res.status(400).json("Something went wrong!");
+  }
+};
+
 const fiveTrans = async (req, res) => {
   const { user_id } = req.params;
 
@@ -176,4 +200,11 @@ const getTrans = async (req, res) => {
   res.json(results);
 };
 
-module.exports = { Register, Login, Trans, fiveTrans, getTrans };
+module.exports = {
+  Register,
+  Login,
+  Trans,
+  summary,
+  fiveTrans,
+  getTrans,
+};
