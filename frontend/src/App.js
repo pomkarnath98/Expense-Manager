@@ -8,9 +8,9 @@ import Dashboard from "./Components/Dashboard";
 function App() {
   return (
     <div className="App">
-      {/* <Route path="/" exact component={Login} />
-      <Route path="/signup" render={(props) => <Register {...props} />} /> */}
-      <Dashboard />
+      <Route path="/" exact render={(props) => <Login {...props} />} />
+      <Route path="/signup" render={(props) => <Register {...props} />} />
+      <Route path="/dashboard" render={(props) => <Dashboard />} />
     </div>
   );
 }
