@@ -9,10 +9,10 @@ import Ledger from "./Components/Ledger";
 function App() {
   return (
     <div className="App">
-      {/* <Route path="/" exact render={(props) => <Login {...props} />} />
+      <Route path="/" exact render={(props) => <Login {...props} />} />
       <Route path="/signup" render={(props) => <Register {...props} />} />
-      <Route path="/dashboard" render={(props) => <Dashboard />} /> */}
-      <Ledger />
+      <Route path="/dashboard" render={(props) => <Dashboard />} />
+      {/* <Ledger /> */}
     </div>
   );
 }
