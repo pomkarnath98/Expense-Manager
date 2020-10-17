@@ -42,6 +42,17 @@ Failure (Status Code - `400`)
 Failure (Status Code - `400`)
 
     "Invalid password!"
+    
+## Summary
+### GET URL - `api/summary/<user_id>`
+
+Success (Status Code - 200)
+
+    {
+        "totalIncome": 185000,
+        "totalExpense": 109000,
+        "balance": 76000
+    }
 
 ## Transaction
 ### POST URL - `/api/transaction`
