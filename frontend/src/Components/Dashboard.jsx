@@ -35,13 +35,15 @@ export const Dashboard = ()=> {
                     </div>
                 </div>
                 <div className="container">
+                <div className="text-center"><button className="rounded bg-white text-success">ALL Transactions</button></div>
                     <div className="row text-center">
-                        <div className="col-lg-3"><button className="rounded bg-white text-success">Add Transaction</button>
-                          <div>
+                       
+                        <div>
+                          <div className="col-lg-4 mx-5"><button className="rounded bg-white text-success">Add Transaction</button></div>
                           
-                          </div>
+                          
                         </div>
-                        <div className="col-lg-8"><h2>Latest Transactions</h2>
+                        <div className="col-lg-6 mx-3">
                         <div>
                         {data && data.map(item=><div key={item.id}  style={{backgroundColor:"#fffcc8",padding:10,display:"flex",justifyContent :"space-around",margin:"10px"}}>
                            <div> {item.title}</div>
