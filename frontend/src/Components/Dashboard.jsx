@@ -8,13 +8,18 @@ import style from "./nav.module.css"
 export const Dashboard = ()=> {
    const [data,setData] = useState([])
    const state = useSelector(state=>state)
+   const [amount,setAmount] = useState({})
    useEffect(()=>{
        const getData = async()=>{
           await Axios.get("http://localhost:9000/api/fivetransaction/"+state.user).then(res=>res.data).then(res=>setData(res)).catch(err=>console.log(err))
        }
+       const getAmount = async ()=>{
+        await Axios.get("http://localhost:9000/api/summary/"+state.user).then(res=>res.data).then(res=>setAmount(res)).catch((err)=>console.log(err))
+       }
+       getAmount()
        getData()
    },[state])
-   console.log(state,data)
+   console.log(amount)
         return (
             <div>
                 <div className="container text-center mt-3">
@@ -22,15 +27,15 @@ export const Dashboard = ()=> {
                     <div className="row">
                         <div className="col-lg-4 shadow-sm p-3 mb-5 mx-1  rounded" style={{backgroundColor:"#fffcc8"}}>
                             <h5>Total Income</h5>
-                            <div>₹1500</div>
+        <div>₹{amount && amount.totalIncome}</div>
                         </div>
                         <div className="col-lg-3 shadow-sm p-3 mb-5 mx-1 rounded" style={{backgroundColor:"#fffcc8"}}>
                             <h5>Balance</h5>
-                            <div>₹900</div>
+                            <div>₹{amount && amount.balance}</div>
                         </div>
                         <div className="col-lg-4 shadow-sm p-3 mb-5 mx-1  rounded " style={{backgroundColor:"#fffcc8"}}>
                             <h5>Total Expense</h5>
-                            <div>₹600</div>
+                            <div>₹{amount && amount.totalExpense}</div>
                         </div>
                     </div>
                 </div>
