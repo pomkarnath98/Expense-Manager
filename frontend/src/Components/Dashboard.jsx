@@ -1,22 +1,34 @@
+import Axios from 'axios'
 import React, { Component } from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import style from "./nav.module.css"
 
-export class Dashboard extends Component {
-    render() {
+export const Dashboard = ()=> {
+   const [data,setData] = useState([])
+   const state = useSelector(state=>state)
+   useEffect(()=>{
+       const getData = async()=>{
+          await Axios.get("http://localhost:9000/api/fivetransaction/"+state.user).then(res=>res.data).then(res=>setData(res)).catch(err=>console.log(err))
+       }
+       getData()
+   },[state])
+   console.log(state,data)
         return (
             <div>
                 <div className="container text-center mt-3">
                     <h3   className={style.navHeader}>Expense Manager</h3>
                     <div className="row">
-                        <div className="col-lg-4 shadow-sm p-3 mb-5 mx-1 bg-white rounded">
+                        <div className="col-lg-4 shadow-sm p-3 mb-5 mx-1  rounded" style={{backgroundColor:"#fffcc8"}}>
                             <h5>Total Income</h5>
                             <div>₹1500</div>
                         </div>
-                        <div className="col-lg-3 shadow-sm p-3 mb-5 mx-1 bg-white rounded">
+                        <div className="col-lg-3 shadow-sm p-3 mb-5 mx-1 rounded" style={{backgroundColor:"#fffcc8"}}>
                             <h5>Balance</h5>
                             <div>₹900</div>
                         </div>
-                        <div className="col-lg-4 shadow-sm p-3 mb-5 mx-1 bg-white rounded ">
+                        <div className="col-lg-4 shadow-sm p-3 mb-5 mx-1  rounded " style={{backgroundColor:"#fffcc8"}}>
                             <h5>Total Expense</h5>
                             <div>₹600</div>
                         </div>
@@ -24,15 +36,28 @@ export class Dashboard extends Component {
                 </div>
                 <div className="container">
                     <div className="row text-center">
-                        <div className="col-lg-3"><button className="rounded bg-white text-success">Add Transaction</button></div>
-                        <div className="col-lg-8">HERE WILL PUT LATEST 5 Transaction</div>
+                        <div className="col-lg-3"><button className="rounded bg-white text-success">Add Transaction</button>
+                          <div>
+                          
+                          </div>
+                        </div>
+                        <div className="col-lg-8"><h2>Latest Transactions</h2>
+                        <div>
+                        {data && data.map(item=><div key={item.id}  style={{backgroundColor:"#fffcc8",padding:10,display:"flex",justifyContent :"space-around",margin:"10px"}}>
+                           <div> {item.title}</div>
+                           <div> {item.amount}</div> 
+                           <div> {item.type}</div> 
+                           <div> {item.date}</div>  </div>)}
+                        </div>
+                        </div>
                     </div>
                     
                 </div>
                 
             </div>
         )
-    }
+    
 }
+
 
 export default Dashboard
