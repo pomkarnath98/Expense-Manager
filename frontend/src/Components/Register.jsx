@@ -21,6 +21,7 @@ function Register(props) {
     }
     const regSuccess = ()=>{
         props.history.push("/")
+        
     }
 
 
@@ -28,7 +29,7 @@ function Register(props) {
         <div  className={style.background}>
             { reg && regSuccess()}
             <NavBar/>
-            <div className="container text-center" style={{width:"34%",marginLeft:"60.7%"}}>
+            <div className="container text-center" style={{width:"34%"}}>
             <form  style={{backgroundColor:"white",padding:"0 10% 10% 10%",borderRadius:"1%"}}>
                 <br/>
                 <div className="form-group">
